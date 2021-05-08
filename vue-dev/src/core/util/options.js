@@ -398,6 +398,7 @@ export function mergeOptions (
     child = child.options
   }
 
+  // 选项的标准化处理
   normalizeProps(child, vm)
   normalizeInject(child, vm)
   normalizeDirectives(child)
@@ -406,6 +407,7 @@ export function mergeOptions (
   // but only if it is a raw options object that isn't
   // the result of another mergeOptions call.
   // Only merged options has the _base property.
+  // 在子选项上应用 extends和mixins，但前提是它是一个原始选项对象，另一个mergeOptions调用的结果，只用合并的选项才用_base属性
   if (!child._base) {
     if (child.extends) {
       parent = mergeOptions(parent, child.extends, vm)
@@ -417,6 +419,7 @@ export function mergeOptions (
     }
   }
 
+  // 最后 return 的结果
   const options = {}
   let key
   for (key in parent) {
